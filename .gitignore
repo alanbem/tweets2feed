@@ -1,0 +1,11 @@
+app/config.php
+cache/*
+logs/*
+templates/*
+vendor/
+composer.phar
+.idea/
+!.gitkeep
+
+Capfile
+deploy/config.rb

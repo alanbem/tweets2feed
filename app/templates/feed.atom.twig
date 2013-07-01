@@ -1,0 +1,38 @@
+{% autoescape false %}
+{% spaceless %}
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+{% if tweets is empty %}
+    <title>@{{ username }} on Twitter</title>
+    <link href="{{ app.request.uri }}" rel="self"/>
+    <link href="{{ url('homepage') }}"/>
+    <updated>{{ 'now' | date("Y-m-d\TH:i:sP") }}</updated>
+    <id>https://twitter.com/{{ username }}</id>
+    <author>
+        <name>@{{ username }}</name>
+    </author>
+
+{% else %}
+    <title>@{{ username }} ({{ tweets[0].user.name }}) on Twitter</title>
+    <link href="{{ app.request.uri }}" rel="self"/>
+    <link href="{{ url('homepage') }}"/>
+    <updated>{{ tweets[0].created_at | date("Y-m-d\TH:i:sP") }}</updated>
+    <id>https://twitter.com/{{ username }}</id>
+    <author>
+        <name>{{ tweets[0].user.name }}</name>
+    </author>
+
+    {% for tweet in tweets %}
+        <entry>
+            <title><![CDATA[ {{ tweet.text }} ]]></title>
+            <link href="https://twitter.com/{{ username }}/status/{{ tweet.id_str }}"/>
+            <updated>{{ tweet.created_at | date("Y-m-d\TH:i:sP") }}</updated>
+            <id>https://twitter.com/{{ username }}/status/{{ tweet.id_str }}</id>
+            <content type="html"><![CDATA[ {{ tweet.text }} ]]></content>
+        </entry>
+    {% endfor %}
+
+{% endif %}
+</feed>
+{% endspaceless %}
+{% endautoescape %}

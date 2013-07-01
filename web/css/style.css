@@ -1,0 +1,176 @@
+@import url("http://fonts.googleapis.com/css?family=Oleo+Script:400,700");
+@import url("http://fonts.googleapis.com/css?family=Lobster");
+@import url("http://fonts.googleapis.com/css?family=Cabin");
+
+html, body {
+    height: 100%;
+}
+
+
+body {
+    background: url('/img/background.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 0;
+}
+
+#site {
+    position:relative;
+    display: block;
+    background-image: url('/img/texture.png');
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+header#bar {
+    background: url('/img/background-2.png') repeat;
+    width: 100%;
+    margin-top: 0;
+    padding: 10px;
+    text-align: center;
+}
+
+header h1 {
+    padding: 0;
+    margin: 0;
+}
+
+header h1 a {
+    font-family: 'Oleo Script', Georgia, Times, serif, cursive;
+    color: #faa732;
+    padding: 0;
+}
+
+header h1 a:hover {
+    color: #f99912;
+    padding: 0;
+    text-decoration: none;
+}
+
+header h1 .logotype-2 {
+    display: none;
+}
+
+header h1 .icon-rss {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#content #slogan {
+    font-family: 'Lobster', Georgia, Times, serif;
+    color: #fff;
+    font-size: 28px;
+}
+
+p {
+    font-family: 'Cabin', Helvetica, Arial, sans-serif;
+    color: #fff;
+}
+
+#content {
+    width: 510px;
+    float: none;
+    margin: 0 auto;
+    padding-top: 0;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#content form {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    /* shrinkwrap */
+    float: left;
+    left: 50%;
+    position: relative;
+    clear: both;
+}
+
+#content form span.add-on {
+    color: #fff;
+    text-shadow: none !important;
+    background: #222;
+    background: rgba(0, 0, 0, 0.1);
+    margin-right: 0;
+    border: none;
+    -webkit-box-shadow: inset 3px 3px 2px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 3px 3px 2px 1px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+    border-left: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+#content form input {
+    background: #000;
+    background: rgba(0, 0,0, 0.1);
+    border: none;
+    -webkit-box-shadow: inset 0px 3px 2px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0px 3px 2px 1px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+#content form .warning span.add-on {
+    -webkit-box-shadow: inset 5px 0px 10px 1px rgba(255, 0, 0, 0.2);
+    box-shadow: inset 5px 0px 10px 1px rgba(255, 0, 0, 0.2);
+    border-top: 1px solid rgba(155, 3, 3, 0.5);
+    border-left: 1px solid rgba(155, 3, 3, 0.5);
+    border-bottom: 1px solid rgba(211, 53, 53, 0.5);
+}
+
+#content form .warning input {
+    -webkit-box-shadow: inset -5px 0px 10px 1px rgba(255, 0, 0, 0.2);
+    box-shadow: inset -5px 0px 10px 1px rgba(255, 0, 0, 0.2);
+    border-top: 1px solid rgba(155, 3, 3, 0.5);
+    border-bottom: 1px solid rgba(211, 53, 53, 0.5);
+}
+
+#content form input:-moz-placeholder {
+    color: #fff;
+}
+
+#content form input:-ms-input-placeholder {
+    color: #fff;
+}
+
+#content form input::-webkit-input-placeholder {
+    color: #fff;
+}
+
+#content form div {
+    /* shrinkwrap */
+    float: left;
+    position: relative;
+    right: 50%;
+}
+
+#content form input[type="text"] {
+    color: #fff;
+}
+
+#content p {
+    clear: left;
+}
+
+#content p a {
+    color: #faa732;
+}
+
+#content p a {
+    color: #f99912;
+}
+
+footer {
+    margin-left:auto;
+    margin-right:auto;
+}
+
+header {
+    font-family: 'Sarina', cursive;
+    margin: 0;
+}

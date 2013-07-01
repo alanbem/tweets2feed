@@ -1,0 +1,11 @@
+<?php
+
+return array(
+    'debug' => true, // set to false in production
+    'secret' => 's3cr3t', // never change this after your application go live or all previously generated feeds will cease to work
+
+    'twitter.api.key' => '',
+    'twitter.api.secret' => '',
+    'twitter.oauth.token' => '', // oauth access token
+    'twitter.oauth.token_secret' => '', // oauth access token secret
+);

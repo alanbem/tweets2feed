@@ -1,0 +1,75 @@
+<!doctype html>
+
+<!--[if lt IE 7 ]> <html class="ie ie6 ie-lt10 ie-lt9 ie-lt8 ie-lt7 no-js" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie ie7 ie-lt10 ie-lt9 ie-lt8 no-js" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie ie8 ie-lt10 ie-lt9 no-js" lang="en"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie ie9 ie-lt10 no-js" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!-- the "no-js" class is for Modernizr. -->
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>{% block title %}{{ app.request.host }}{% endblock %}</title>
+
+    <meta name="title" content="{{ block('title') }}" />
+    <meta name="description" content="{% block description %}Generate for any Twitter user timeline!{% endblock %}" />
+
+    {#<link rel="shortcut icon" href="/img/favicon.ico" />#}
+
+    {#<link rel="apple-touch-icon" href="/img/apple-touch-icon.png" />#}
+
+    {% include 'layout/stylesheets.html.twig' %}
+
+    <meta name="application-name" content="{{ block('title') }}" />
+    <meta name="msapplication-TileColor" content="" />
+    <meta name="msapplication-TileImage" content="" />
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:creator" content="@alangbem">
+    <meta name="twitter:title" content="{{ block('title') }}">
+    <meta name="twitter:description" content="{{ block('description') }}">
+    <meta name="twitter:url" content="{{ app.request.uri }}">
+
+    <meta property="og:title" content="{{ block('title') }}" />
+    <meta property="og:description" content="{{ block('description') }}" />
+    <meta property="og:url" content="{{ app.request.uri }}" />
+    <meta property="og:image" content="" />
+
+</head>
+
+<body>
+
+<div id="site" class="container">
+
+    <header id="bar">
+
+        <h1><a href="{{ url('homepage') }}">Tweets<i class="icon-rss"></i><span class="logotype-2">2</span>Feed</a></h1>
+
+    </header>
+
+    <article id="content" class="span7">
+
+{% block body %}{% endblock %}
+
+    </article>
+
+    {#<footer class="span6">#}
+
+        {#<p><small>Copyright &copy; {{ 'now' | date('Y') }} Alan Gabriel Bem</small></p>#}
+
+    {#</footer>#}
+
+</div>
+
+<!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+
+{% include 'layout/javascripts.html.twig' %}
+
+{% include 'layout/tracking.html.twig' %}
+
+</body>
+</html>
