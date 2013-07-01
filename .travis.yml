@@ -1,6 +1,8 @@
 language: php
 
 before_script:
+  - pecl install oauth
+  - phpenv config-add php.ini
   - composer install --dev --prefer-source
 
 php:
