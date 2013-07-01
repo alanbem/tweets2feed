@@ -6,7 +6,7 @@
     <title>@{{ username }} on Twitter</title>
     <link href="{{ app.request.uri }}" rel="self"/>
     <link href="{{ url('homepage') }}"/>
-    <updated>{{ 'now' | date("Y-m-d\TH:i:sP") }}</updated>
+    <updated>{{ 'now' | date("Y-m-d\\TH:i:sP", "UTC") }}</updated>
     <id>https://twitter.com/{{ username }}</id>
     <author>
         <name>@{{ username }}</name>
@@ -16,7 +16,7 @@
     <title>@{{ username }} ({{ tweets[0].user.name }}) on Twitter</title>
     <link href="{{ app.request.uri }}" rel="self"/>
     <link href="{{ url('homepage') }}"/>
-    <updated>{{ tweets[0].created_at | date("Y-m-d\TH:i:sP") }}</updated>
+    <updated>{{ tweets[0].created_at | date("Y-m-d\\TH:i:sP", "UTC") }}</updated>
     <id>https://twitter.com/{{ username }}</id>
     <author>
         <name>{{ tweets[0].user.name }}</name>
@@ -26,7 +26,7 @@
         <entry>
             <title><![CDATA[ {{ tweet.text }} ]]></title>
             <link href="https://twitter.com/{{ username }}/status/{{ tweet.id_str }}"/>
-            <updated>{{ tweet.created_at | date("Y-m-d\TH:i:sP") }}</updated>
+            <updated>{{ tweet.created_at | date("Y-m-d\\TH:i:sP", "UTC") }}</updated>
             <id>https://twitter.com/{{ username }}/status/{{ tweet.id_str }}</id>
             <content type="html"><![CDATA[ {{ tweet.text }} ]]></content>
         </entry>
