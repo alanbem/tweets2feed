@@ -2,7 +2,7 @@ language: php
 
 before_script:
   - pecl install oauth
-  - phpenv config-add php.ini
+  - cp app/config.php.dist app/config.php
   - composer install --dev --prefer-source
 
 php:
