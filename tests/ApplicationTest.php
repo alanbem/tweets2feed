@@ -144,7 +144,7 @@ class ApplicationTest extends WebTestCase
             $buzz
                 ->expects($tests->once())
                 ->method('get')
-                ->will($this->returnValue($response))
+                ->will($tests->returnValue($response))
             ;
 
             return $buzz;
