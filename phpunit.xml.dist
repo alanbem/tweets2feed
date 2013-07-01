@@ -11,7 +11,7 @@
          bootstrap = "vendor/autoload.php" >
         >
     <testsuites>
-        <testsuite name="Twitter2Atom Test Suite">
+        <testsuite name="Tweets2Feed Test Suite">
             <directory>./tests/</directory>
         </testsuite>
     </testsuites>
