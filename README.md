@@ -4,7 +4,7 @@ Tweets2Feed
 [![Build Status](https://secure.travis-ci.org/alanbem/tweets2feed.png?branch=master)](http://travis-ci.org/alanbem/tweets2feed)
 
 Generate feed for any Twitter user timeline!
-============================================
+--------------------------------------------
 
 I created this application after Twitter dropped their support of RSS feed and most of my Google Reader subscriptions froze.
 I've been using it by myself for some time now and decided to share with you.
