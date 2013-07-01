@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Tweets2Feed application.
+ *
+ * Copyright (c) Alan Gabriel Bem <alan.bem@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Constraints as Constraints;
