@@ -7,5 +7,6 @@ composer.phar
 .idea/
 !.gitkeep
 
+.rsync_cache
 Capfile
 deploy/config.rb
