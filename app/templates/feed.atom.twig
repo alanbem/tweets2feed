@@ -1,5 +1,4 @@
 {% autoescape false %}
-{% spaceless %}
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 {% if tweets is empty %}
@@ -28,11 +27,10 @@
             <link href="https://twitter.com/{{ username }}/status/{{ tweet.id_str }}"/>
             <updated>{{ tweet.created_at | date("Y-m-d\\TH:i:sP", "UTC") }}</updated>
             <id>https://twitter.com/{{ username }}/status/{{ tweet.id_str }}</id>
-            <content type="html"><![CDATA[ {{ tweet.text }} ]]></content>
+            <content type="html"><![CDATA[ {{ tweet | linkify }} ]]></content>
         </entry>
     {% endfor %}
 
 {% endif %}
 </feed>
-{% endspaceless %}
 {% endautoescape %}
