@@ -213,7 +213,7 @@ $app->get('/{username}.atom', function ($username) use ($app) {
 
     try {
 
-        $twitter->fetch('https://api.twitter.com/1.1/statuses/user_timeline.json', array('screen_name' => $username));
+        $twitter->fetch('https://api.twitter.com/1.1/statuses/user_timeline.json', array('screen_name' => $username, 'count' => 200));
 
     } catch (\OAuthException $e) {
         $app->abort(500, $e->getMessage());

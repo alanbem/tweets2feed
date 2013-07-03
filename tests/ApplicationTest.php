@@ -169,17 +169,18 @@ class ApplicationTest extends WebTestCase
     /**
      * @dataProvider feeds
      *
+     * @param string $username
      * @param string $path
      * @param array $tweets
      * @param string $atom
      */
-    public function testFeed($path, $tweets, $atom)
+    public function testFeed($username, $path, $tweets, $atom)
     {
         /* @var $app \Silex\Application */
         $app = $this->app;
         $tests = $this;
         // mock Twitter oauth client
-        $app['twitter.oauth.client'] = $app->share(function ($app) use ($tests, $tweets) {
+        $app['twitter.oauth.client'] = $app->share(function ($app) use ($tests, $tweets, $username) {
 
             $oauth = $tests
                 ->getMockBuilder('OAuth')
@@ -191,6 +192,7 @@ class ApplicationTest extends WebTestCase
             $oauth
                 ->expects($tests->once())
                 ->method('fetch')
+                ->with('https://api.twitter.com/1.1/statuses/user_timeline.json', array('screen_name' => $username, 'count' => 200))
                 ->will($tests->returnValue(true))
             ;
 
@@ -309,7 +311,7 @@ class ApplicationTest extends WebTestCase
     {
         // TODO: add more varied feeds
         return array(
-            array('/alangbem.atom?signature=87ea11b701cfcd5e6ec73c8fb2fd2cb6032abf73', $json = file_get_contents(__DIR__ . '/data/alangbem.json'), $atom = file_get_contents(__DIR__ . '/data/alangbem.atom')),
+            array('alangbem', '/alangbem.atom?signature=87ea11b701cfcd5e6ec73c8fb2fd2cb6032abf73', $json = file_get_contents(__DIR__ . '/data/alangbem.json'), $atom = file_get_contents(__DIR__ . '/data/alangbem.atom')),
         );
     }
 }
