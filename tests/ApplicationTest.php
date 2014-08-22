@@ -33,7 +33,7 @@ class ApplicationTest extends WebTestCase
         $app['twitter.api.secret'] = '';
         $app['twitter.oauth.token'] = '';
         $app['twitter.oauth.token_secret'] = '';
-        $app['cache.default_ttl'] = 0;
+        $app['cache.ttl'] = 0;
 
         return $app;
     }

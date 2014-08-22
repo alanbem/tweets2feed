@@ -124,7 +124,7 @@ $app->register(new Silex\Provider\HttpCacheServiceProvider(), array(
     'http_cache.cache_dir' => __DIR__ . '/../cache',
     'http_cache.esi' => null, // as we do not use ESI, lets disable it
     'http_cache.options' => array(
-        'default_ttl' => $app['cache.default_ttl'],
+        'default_ttl' => $app['cache.ttl'],
     ),
 ));
 $app->register(new Silex\Provider\MonologServiceProvider(), array(
