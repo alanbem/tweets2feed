@@ -27,7 +27,7 @@
             <link href="https://twitter.com/{{ username }}/status/{{ tweet.id_str }}"/>
             <updated>{{ tweet.created_at | date("Y-m-d\\TH:i:sP", "UTC") }}</updated>
             <id>https://twitter.com/{{ username }}/status/{{ tweet.id_str }}</id>
-            <content type="html"><![CDATA[ {{ tweet | linkify }} ]]></content>
+            <content type="html"><![CDATA[ {{ tweet | linkify }}{% for photo in tweet | photos %} <br /><img src="{{ photo }}" />{% endfor %} ]]></content>
         </entry>
     {% endfor %}
 

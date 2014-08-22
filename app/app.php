@@ -35,56 +35,97 @@ $app['twig'] = $app->share($app->extend('twig', function($twig, $app) {
         $text = $tweet['text'];
 
         // hastags
-        $linkified = array();
-        foreach ($tweet['entities']['hashtags'] as $hashtag) {
-            $hash = $hashtag['text'];
+        if (true === array_key_exists('hashtags', $tweet['entities'])) {
+            $linkified = array();
+            foreach ($tweet['entities']['hashtags'] as $hashtag) {
+                $hash = $hashtag['text'];
 
-            if (in_array($hash, $linkified)) {
-                continue; // do not process same hash twice or more
+                if (in_array($hash, $linkified)) {
+                    continue; // do not process same hash twice or more
+                }
+                $linkified[] = $hash;
+
+                // replace single words only, so looking for #Google we wont linkify >#Google<Reader
+                $text = preg_replace('/#\b' . $hash . '\b/', sprintf('<a href="https://twitter.com/search?q=%%23%2$s&src=hash">#%1$s</a>', $hash, urlencode($hash)), $text);
             }
-            $linkified[] = $hash;
-
-            // replace single words only, so looking for #Google we wont linkify >#Google<Reader
-            $text = preg_replace('/#\b' . $hash . '\b/', sprintf('<a href="https://twitter.com/search?q=%%23%2$s&src=hash">#%1$s</a>', $hash, urlencode($hash)), $text);
         }
 
         // user mentions
-        $linkified = array();
-        foreach ($tweet['entities']['user_mentions'] as $userMention) {
-            $name = $userMention['name'];
-            $screenName = $userMention['screen_name'];
+        if (true === array_key_exists('user_mentions', $tweet['entities'])) {
+            $linkified = array();
+            foreach ($tweet['entities']['user_mentions'] as $userMention) {
+                $name = $userMention['name'];
+                $screenName = $userMention['screen_name'];
 
-            if (in_array($screenName, $linkified)) {
-                continue; // do not process same user mention twice or more
+                if (in_array($screenName, $linkified)) {
+                    continue; // do not process same user mention twice or more
+                }
+                $linkified[] = $screenName;
+
+                // replace single words only, so looking for @John we wont linkify >@John<Snow
+                $text = preg_replace('/@\b' . $screenName . '\b/', sprintf('<a href="https://www.twitter.com/%1$s" title="%2$s">@%1$s</a>', $screenName, $name), $text);
             }
-            $linkified[] = $screenName;
-
-            // replace single words only, so looking for @John we wont linkify >@John<Snow
-            $text = preg_replace('/@\b' . $screenName . '\b/', sprintf('<a href="https://www.twitter.com/%1$s" title="%2$s">@%1$s</a>', $screenName, $name), $text);
         }
 
         // urls
-        $linkified = array();
-        foreach ($tweet['entities']['urls'] as $url) {
-            $expandedUrl = $url['expanded_url'];
-            $url = $url['url'];
+        if (true === array_key_exists('urls', $tweet['entities'])) {
+            $linkified = array();
+            foreach ($tweet['entities']['urls'] as $url) {
+                $expandedUrl = $url['expanded_url'];
+                $url = $url['url'];
 
-            if (in_array($url, $linkified)) {
-                continue; // do not process same url twice or more
+                if (in_array($url, $linkified)) {
+                    continue; // do not process same url twice or more
+                }
+                $linkified[] = $url;
+
+                $text = str_replace($url, sprintf('<a href="%1$s" title="%2$s">%1$s</a>', $url, $expandedUrl), $text);
             }
-            $linkified[] = $url;
+        }
 
-            $text = str_replace($url, sprintf('<a href="%1$s" title="%2$s">%1$s</a>', $url, $expandedUrl), $text);
+        // media
+        if (true === array_key_exists('media', $tweet['entities'])) {
+            $linkified = array();
+            foreach ($tweet['entities']['media'] as $media) {
+                $mediaUrl = $media['media_url'];
+                $media = $media['url'];
+
+                if (in_array($media, $linkified)) {
+                    continue; // do not process same url twice or more
+                }
+                $linkified[] = $media;
+
+                $text = str_replace($media, sprintf('<a href="%1$s" title="%2$s">%1$s</a>', $media, $mediaUrl), $text);
+            }
         }
 
         return $text;
     }));
 
+    $twig->addFilter('photos', new \Twig_Filter_Function(function (array $tweet) {
+        $photos = array();
+
+        if (false === array_key_exists('media', $tweet['entities'])) {
+            return $photos;
+        }
+
+        foreach ($tweet['entities']['media'] as $media) {
+            if ('photo' === $media['type']) {
+                $photos[] = $media['media_url'];
+            }
+        }
+
+        return $photos;
+    }));
+
     return $twig;
 }));
 $app->register(new Silex\Provider\HttpCacheServiceProvider(), array(
-    'http_cache.cache_dir' => __DIR__ . '/../cache/',
+    'http_cache.cache_dir' => __DIR__ . '/../cache',
     'http_cache.esi' => null, // as we do not use ESI, lets disable it
+    'http_cache.options' => array(
+        'default_ttl' => $app['cache.default_ttl'],
+    ),
 ));
 $app->register(new Silex\Provider\MonologServiceProvider(), array(
     'monolog.logfile' => __DIR__ . '/../logs/' . date('Ymd') . '.log', // rotating log file
